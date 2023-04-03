@@ -40,8 +40,8 @@
           }"
         >
           <span class="mt-2 badge badge-warning">
-            <i class="fas fa-edit"></i> Hiệu chỉnh</span
-          >
+            <i class="fas fa-edit"></i> Hiệu chỉnh
+          </span>
         </router-link>
       </div>
     </div>
@@ -53,6 +53,7 @@ import ContactCard from "@/components/ContactCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
 import ContactList from "@/components/ContactList.vue";
 import ContactService from "@/services/contact.service";
+
 export default {
   components: {
     ContactCard,
@@ -67,6 +68,7 @@ export default {
       searchText: "",
     };
   },
+
   watch: {
     // Giám sát các thay đổi của biến searchText.
     // Bỏ chọn phần tử đang được chọn trong danh sách.
@@ -74,6 +76,7 @@ export default {
       this.activeIndex = -1;
     },
   },
+
   computed: {
     // Chuyển các đối tượng contact thành chuỗi để tiện cho tìm kiếm.
     contactStrings() {
@@ -101,14 +104,17 @@ export default {
     async retrieveContacts() {
       try {
         this.contacts = await ContactService.getAll();
+        console.log(this.contacts);
       } catch (error) {
         console.log(error);
       }
     },
+
     refreshList() {
       this.retrieveContacts();
       this.activeIndex = -1;
     },
+
     async removeAllContacts() {
       if (confirm("Bạn muốn xóa tất cả Liên hệ?")) {
         try {
@@ -119,6 +125,7 @@ export default {
         }
       }
     },
+
     goToAddContact() {
       this.$router.push({ name: "contact.add" });
     },

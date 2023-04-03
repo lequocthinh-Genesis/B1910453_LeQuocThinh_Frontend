@@ -4,7 +4,6 @@ class ContactService {
     constructor(baseUrl = "/api/contacts") {
         this.api = createApiClient(baseUrl);
     }
-
     async getAll() {
         return (await this.api.get("/")).data;
     }
@@ -12,7 +11,8 @@ class ContactService {
         return (await this.api.post("/", data)).data;
     }
     async deleteAll() {
-        return (await this.api.delete("/")).data;
+        const data = (await this.api.delete("/")).data;
+        return data
     }
     async get(id) {
         return (await this.api.get(`/${id}`)).data;
@@ -24,4 +24,5 @@ class ContactService {
         return (await this.api.delete(`/${id}`)).data;
     }
 }
+
 export default new ContactService();

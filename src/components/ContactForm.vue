@@ -52,7 +52,7 @@
       </label>
     </div>
     <div class="form-group">
-      <button class="btn btn-primary">Lưu</button>
+      <button v-if="contactLocal._id" class="btn btn-primary">Lưu</button>
       <button
         v-if="contactLocal._id"
         type="button"
@@ -61,12 +61,23 @@
       >
         Xóa
       </button>
+      <button
+        v-if="!contactLocal._id"
+        type="button"
+        class="btn btn-primary"
+        @click="addContact"
+      >
+        <i class="fas fa-save"></i>
+        <span> Lưu</span>
+      </button>
     </div>
   </Form>
 </template>
+
 <script>
 import * as yup from "yup";
 import { Form, Field, ErrorMessage } from "vee-validate";
+
 export default {
   components: {
     Form,
@@ -110,9 +121,13 @@ export default {
     deleteContact() {
       this.$emit("delete:contact", this.contactLocal.id);
     },
+    addContact() {
+      this.$emit("add:contact", this.contactLocal);
+    },
   },
 };
 </script>
+
 <style scoped>
 @import "@/assets/form.css";
 </style>
